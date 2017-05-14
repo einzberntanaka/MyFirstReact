@@ -1,7 +1,5 @@
-var React = require('react');
+import React from 'react';
 
-function App (props) {
-	return <h1>Hello, my first reactjs application</h1>
-}
+const App = () => <h1>First Application</h1>
 
-module.exports = App;
+export default App
