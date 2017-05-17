@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
+require('./styles/item1.css');
+require('./styles/item2.css');
 
 class Button extends React.Component {
 	constructor (props) {
