@@ -1,64 +1,41 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App';
-require('./styles/item1.css');
-require('./styles/item2.css');
+import Header from './components/header';
+import FooterComponent from './components/footer';
+import Wrapper from './components/wrapper';
+import {SideNav, SideNavItem, NavItem, Navbar, Button, Icon} from 'react-materialize';
 
-class Button extends React.Component {
-	constructor (props) {
-		super(props);
-
-		this.handleClick = this.handleClick.bind(this);
-	}
-	handleClick () {
-		this.props.onClick(this.props.incrementValue);
-	};
-	render () {
-		return (
-			<button onClick={this.handleClick}>
-				{this.props.incrementValue}
-			</button>
-		);
-	}
-}
-function Welcome(props) {
-  return <h1>Hello, {props.name}</h1>;
-}
-
-// Can not apply event in this function
-/*function Button (props) {
-	handleClick () {
-		props.onClick(props.incrementValue);
-	};
-
-	return (
-		<button onClick={props.onClick}>
-			{props.incrementValue}
-		</button>
-	);
-}*/
 
 class Main extends React.Component {
 	constructor (props) {
 		super(props);
-		this.state = { counter:2 };
+		this.state = {
+			title:'Cowboy Bebop',
+			total_episode: 'total_episodes',
+			image_url_lge: 'http://anilist.co/img/dir/anime/reg/1.jpg',
+			image_url_banner: 'http://anilist.co/img/dir/anime/banner/1.jpg',
+			description: 'Enter a world in the distant future, where Bounty Hunters roam the solar system. Spike and Jet, bounty hunting partners, set out on journeys in an ever struggling effort to win bounty rewards to survive. While traveling, they meet up with other very interesting people. Could Faye, the beautiful and ridiculously poor gambler, Edward, the computer genius, and Ein, the engineered dog be a good addition to the group?'
+		};
 
-		this.handleClick = this.handleClick.bind(this);
+		this.showInfo = this.showInfo.bind(this);
 	}
-	handleClick (incrementValue) {
-		this.setState (prevState => ({
-			counter: prevState.counter + incrementValue
-		}));
+	showInfo (data) {
+		this.setState ({
+			title: data.title_romaji,
+			total_episode: data.total_episodes,
+			image_url_lge: data.image_url_lge,
+			image_url_banner: data.image_url_banner,
+			description: data.description
+		});
 	};
+
+
 	render () {
 		return (
 			<div>
-				<Welcome name="First User"/>
-				<Button incrementValue={1} onClick={this.handleClick} />
-				<Button incrementValue={5} onClick={this.handleClick} />
-				<Button incrementValue={10} onClick={this.handleClick} />
-				<Button incrementValue={20} onClick={this.handleClick} />
-				<h1>{this.state.counter}</h1>
+				<Header />
+				<Wrapper onSubmit={this.showInfo}  dataValue={this.state}/>
+				<FooterComponent />
 			</div>
 		);
 	}
